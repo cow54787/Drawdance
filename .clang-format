@@ -44,4 +44,5 @@ PointerAlignment: Right
 SpaceBeforeParens: ControlStatementsExceptControlMacros
 UseCRLF: false
 UseTab: Never
+ColumnLimit: 0
 ...

@@ -18,8 +18,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-function(set_language_standards target)
-    set_target_properties("${target}" PROPERTIES
-            C_STANDARD 11 C_STANDARD_REQUIRED ON C_EXTENSIONS OFF
-            CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON CXX_EXTENSIONS OFF)
-endfunction()
+set(simd_sources main.c)
+
+add_clang_format_files("${simd_sources}")
+
+add_executable(simd "${simd_sources}")
+set_dp_target_properties(simd)
+target_link_libraries(simd PUBLIC dpcommon dpengine dpmsg)
+
+find_package(benchmark CONFIG REQUIRED)
+
+set(simd_bench_sources simd_bench.cpp)
+add_clang_format_files("${simd_bench_sources}")
+
+add_executable(simd_bench "${simd_bench_sources}")
+set_dp_target_properties(simd_bench CXX NO_WARNINGS)
+target_link_libraries(simd_bench PUBLIC dpcommon dpengine dpmsg benchmark::benchmark benchmark::benchmark_main)
