@@ -1,5 +1,6 @@
 #include "simd.c"
 
+#include "dpcommon/cpu.h"
 #include "dpcommon/input.h"
 #include "dpcommon/output.h"
 #include "dpcommon/perf.h"
@@ -197,6 +198,9 @@ int main_()
 
 int main()
 {
+
+    DP_CPU_SUPPORT cpu = DP_get_cpu_support();
+
 
     int it = 500000;
     bench_load("clang autovec", it, DP_blend_pixels);
