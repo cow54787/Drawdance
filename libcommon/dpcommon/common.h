@@ -87,14 +87,16 @@
 #    define DP_MUST_CHECK                           // nothing
 #    define DP_INLINE                               static inline
 #    define DP_NOINLINE                             // nothing
-#    define DP_ASSUME_SIMD_ALIGNED(PTR)             (PTR, DP_SIMD_ALIGNMENT)
 #endif
 
 #ifdef _MSC_VER
 typedef long double DP_max_align_t;
 #    define DP_FORCE_INLINE DP_INLINE __forceinline
+#    define DP_ASSUME_SIMD_ALIGNED(PTR) \
+        (__assume((intptr_t)(PTR) % DP_SIMD_ALIGNMENT == 0), PTR)
 #else
 typedef max_align_t DP_max_align_t;
+#    define DP_ASSUME_SIMD_ALIGNED(PTR) (PTR)
 #endif
 
 #ifdef __cplusplus

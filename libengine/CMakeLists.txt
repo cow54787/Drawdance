@@ -205,4 +205,5 @@ if(BUILD_BENCHMARKS)
 
     add_benchmark(blending_simd_bench benchmark/blending_simd_bench.cpp)
     add_benchmark(15to8_simd_bench benchmark/15to8_simd_bench.cpp)
+    add_benchmark(blending_mask_simd_bench benchmark/blending_mask_simd_bench.cpp)
 endif()
